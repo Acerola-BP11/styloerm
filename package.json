@@ -1,0 +1,36 @@
+{
+  "name": "styloerm",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
+    "@mui/icons-material": "^5.14.12",
+    "@mui/material": "^5.14.12",
+    "@mui/x-data-grid": "^6.16.1",
+    "debug": "^4.3.4",
+    "firebase": "^10.4.0",
+    "lodash": "^4.17.21",
+    "next": "13.5.4",
+    "next-client-cookies": "^1.1.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hook-form": "^7.47.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10",
+    "encoding": "^0.1.13",
+    "eslint": "^8",
+    "eslint-config-next": "13.5.4",
+    "postcss": "^8",
+    "tailwindcss": "^3"
+  }
+}
