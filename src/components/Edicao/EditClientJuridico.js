@@ -8,7 +8,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
     const [ cidade, setCidade ] = useState(client.cidade || '')
     const [ bairro, setBairro] = useState(client.bairro || '')
     const [ endereco, setEndereco ] = useState(client.endereco || '')
-    const [ uf, setUf ] = useState(client.uf || '')
+    const [ uf, setUf ] = useState(client.estado || '')
 
     const validaCep = async (evento) => {
         const cep = evento.target.value
@@ -17,6 +17,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                 console.log(`viacep.com.br/ws/${cep}/json/`)
                 const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
                 const data = response.data
+                console.log(data)
                 setValue('cidade', data.localidade)
                 setValue('bairro', data.bairro,)
                 setValue('endereco', data.logradouro)
@@ -154,6 +155,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                     )}
                     name="cidade"
                     control={control}
+                    defaultValue={client.cidade}
                     rules={{
                         required: true
                     }}
@@ -181,6 +183,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                     )}
                     control={control}
                     name="endereco"
+                    defaultValue={client.endereco}
                     rules={{
                         required: true
                     }}
@@ -210,6 +213,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                     )}
                     control={control}
                     name="bairro"
+                    defaultValue={client.bairro}
                     rules={{
                         required: true
                     }}
@@ -237,6 +241,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                     )}
                     control={control}
                     name="uf"
+                    defaultValue={client.estado}
                     rules={{
                         required: true
                     }}

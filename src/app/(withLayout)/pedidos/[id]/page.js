@@ -1,6 +1,4 @@
 'use client'
-import EditClientFisico from "@/components/Edicao/EditClientFisico";
-import EditClientJurico from "@/components/Edicao/EditClientJuridico";
 import DarkTheme from "@/components/darkTheme";
 import { Edit } from "@mui/icons-material";
 import { Button, IconButton, Skeleton } from "@mui/material";
@@ -11,77 +9,40 @@ import { useForm } from "react-hook-form";
 
 export default function EditClient({ params }) {
     const [editing, setEditing] = useState(false)
-    const [client, setClient] = useState(null)
     const { control, handleSubmit, setValue } = useForm()
-    const onInvalid = (errors) => console.error(errors)
+    const { order, setOrder } = useState({})
+    const [type, setType] = useState('venda')
+    const [itensArray, setItensArray] = useState([])
 
     const router = useRouter()
 
     const onSubmit = async (data) => {
-        let editData
-        if (client.cnpj) {
-            editData = {
-                razao: data.razao,
-                nome_fantasia: data.nome_fantasia,
-                cnpj: data.cnpj,
-                inscricao_estadual: data.inscricao_estadual,
-                cep: data.cep,
-                cidade: data.cidade,
-                endereco: data.endereco,
-                bairro: data.bairro,
-                estado: data.uf,
-                numero: data.numero,
-                pessoa_contato: data.pessoa_contato,
-                telefone1: data.telefone1,
-                telefone2: data.telefone2,
-                email: data.email
-            }
-        } else {
-            editData = {
-                nome: data.nome,
-                cpf: data.cpf,
-                cep: data.cep,
-                cidade: data.cidade,
-                endereco: data.endereco,
-                bairro: data.bairro,
-                estado: data.uf,
-                numero: data.numero,
-                pessoa_contato: data.pessoa_contato,
-                telefone1: data.telefone1,
-                telefone2: data.telefone2,
-                email: data.email
-            }
+        data.itens = itensArray
+        const order = {
+            client: data.cliente,
+            city: data.cidade,
+            adress: data.endereco,
+            itens: data.itens,
+            budget: type === 'cotacao' ? true : false
         }
         try {
-            if (client.cnpj) {
-                await axios.put(`http://localhost:3500/clients/cnpj/${client.cnpj}`, editData, {
-                    headers: {
-                        "Authorization": localStorage.getItem('token')
-                    }
-                })
-            } else {
-                await axios.put(`http://localhost:3500/clients/physical/${client.cpf}`, editData, {
-                    headers: {
-                        "Authorization": localStorage.getItem('token')
-                    }
-                })
-            }
             setEditing(false)
-            router.push('http://localhost:3000/clientes/lista')
+            // router.push('http://localhost:3000/clientes/lista')
+            console.log(order)
         } catch (error) {
             alert(error)
         }
     }
 
-    const getClientData = async () => {
+    const getOrderData = async () => {
         try {
-            const response = await axios.get(`http://localhost:3500/clients/${params.id}`, {
+            const response = await axios.get(`http://localhost:3500/orders/${params.id}`, {
                 headers: {
                     "Authorization": localStorage.getItem('token')
                 }
             })
-            const clientData = await response.data
-            setClient(clientData)
+            const orderData = await response.data
+            setOrder(orderData)
         } catch (err) {
             alert(err)
         }
@@ -104,7 +65,7 @@ export default function EditClient({ params }) {
                     </IconButton>
                 </div>
                 <div className="w-11/12 h-5/6 border border-solid border-amber-800 p-5">
-                    <form onSubmit={handleSubmit(onSubmit, onInvalid)} className="h-max">
+                    <form onSubmit={handleSubmit(onSubmit)} className="h-max">
                         {client ? (
                             (
                                 client.cnpj ? (

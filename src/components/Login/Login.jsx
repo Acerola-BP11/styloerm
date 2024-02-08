@@ -18,7 +18,10 @@ export default function Login() {
         const {email, password} = data
 
         await axios.post('http://localhost:3500/user/login', {email, password})
-        .then(a => {
+        .then((response) => {
+            const { sessionToken, username } = response.data
+            localStorage.setItem('token', sessionToken)
+            localStorage.setItem('username', username)
             router.push('/')
         })
         .catch((e) => {
@@ -74,7 +77,8 @@ export default function Login() {
                     <div className="mt-16 flex flex-row justify-between items-center px-5">
                         <Button
                             variant="contained"
-                            type="submit"
+                            LinkComponent={Link}
+                            href="/register"
                             className="bg-blue-700"
                         >
                             Criar Conta

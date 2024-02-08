@@ -1,4 +1,3 @@
-import { CookiesProvider } from 'next-client-cookies/server';
 import '@/app/globals.css';
 
 export const metadata = {
@@ -10,9 +9,7 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body>
-                <CookiesProvider>
-                    {children}
-                </CookiesProvider>
+                {children}
             </body>
         </html>
     )

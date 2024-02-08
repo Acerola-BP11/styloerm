@@ -21,7 +21,7 @@ export default function CadastroPessoaJuridica({ control, setValue }) {
                 setValue('cidade', data.localidade)
                 setValue('bairro', data.bairro)
                 setValue('endereco', data.logradouro)
-                setValue('uf', data.uf)
+                setValue('uf', data.estado)
                 setCidade(data.localidade)
                 setBairro(data.bairro)
                 setEndereco(data.logradouro)

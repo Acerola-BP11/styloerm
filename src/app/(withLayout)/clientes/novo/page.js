@@ -3,7 +3,6 @@
 import CadastroPessoaFisica from "@/components/Cadastro/CadastroPessoaFisica";
 import CadastroPessoaJuridica from "@/components/Cadastro/CadastroPessoaJuridica";
 import DarkTheme from "@/components/darkTheme";
-import { auth } from "@/utils/firebase";
 import { Button, MenuItem, Select } from "@mui/material";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -29,13 +28,12 @@ export default function CadastrarClientes() {
                 cidade: data.cidade,
                 endereco: data.endereco,
                 bairro: data.bairro,
-                uf: data.uf,
+                estado: data.uf,
                 numero: data.numero,
                 pessoa_contato: data.pessoa_contato,
                 telefone1: data.telefone1,
                 telefone2: data.telefone2,
                 email: data.email,
-                tipo: tipoCadastro
             }
         } else {
             client = {
@@ -45,20 +43,20 @@ export default function CadastrarClientes() {
                 cidade: data.cidade,
                 endereco: data.endereco,
                 bairro: data.bairro,
-                uf: data.uf,
+                estado: data.uf,
                 numero: data.numero,
                 pessoa_contato: data.pessoa_contato,
                 telefone1: data.telefone1,
                 telefone2: data.telefone2,
-                email: data.email,
-                tipo: tipoCadastro
+                email: data.email
             }
         }
         try {
-            await axios.post('http://localhost:3500/clients/new', client,
+            const url = tipoCadastro == 'juridica' ? 'http://localhost:3500/clients/cnpj' : 'http://localhost:3500/clients/physical'
+            await axios.post(url, client,
                 {
                     headers: {
-                        "Authorization": await auth.currentUser.getIdToken()
+                        "Authorization": localStorage.getItem('token')
                     }
                 }
             

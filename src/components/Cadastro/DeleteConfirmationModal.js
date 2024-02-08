@@ -1,19 +1,16 @@
-import { auth } from "@/utils/firebase";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import axios from "axios";
 
-export default function DeleteConfirmationModal({ selectedIds, text, onDelete, confirmationModalOpen, setConfirmationModalOpen, title, setSelectedIds }) {
+export default function DeleteConfirmationModal({ selectedIds, text, onDelete, confirmationModalOpen, setConfirmationModalOpen, title, setSelectedIds, url }) {
     
 
     const handleClose = () => {
         setConfirmationModalOpen(false)
     }
-    const handleConfirm = () => {
-        axios.post('http://localhost:3500/clients/delete', {ids: selectedIds}, {
-            headers: {
-                'Authorization': auth.currentUser.getIdToken()
-            }
-        })
+    const handleConfirm = async () => {
+        await axios.delete(url, { data: { ids: selectedIds }, headers: {
+            "Authorization": localStorage.getItem('token')
+        } })
         setSelectedIds([])
         setConfirmationModalOpen(false)
         onDelete()

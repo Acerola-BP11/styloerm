@@ -8,7 +8,7 @@ export default function EditClientFisico({control, client, editing, setValue }) 
     const [cidade, setCidade] = useState(client.cidade || '');
     const [endereco, setEndereco] = useState(client.endereco || '');
     const [bairro, setBairro] = useState(client.bairro || '');
-    const [uf, setUf] = useState(client.uf || '');
+    const [uf, setUf] = useState(client.estado || '');
 
 
     const validaCep = async (evento) => {
@@ -144,6 +144,7 @@ export default function EditClientFisico({control, client, editing, setValue }) 
                             {...field}
                             id="cidade"
                             label="Cidade"
+                            defaultValue={client.cidade}
                             variant="outlined"
                             color="primary"
                             inputMode="text"
@@ -162,6 +163,7 @@ export default function EditClientFisico({control, client, editing, setValue }) 
                 <Controller
                     name="endereco"
                     control={control}
+                    defaultValue={client.endereco}
                     rules={{
                         required: true
                     }}
@@ -198,6 +200,7 @@ export default function EditClientFisico({control, client, editing, setValue }) 
                         <TextField
                             {...field}
                             id="bairro"
+                            defaultValue={client.bairro}
                             label="Bairro"
                             variant="outlined"
                             color="primary"
@@ -218,6 +221,7 @@ export default function EditClientFisico({control, client, editing, setValue }) 
                 <Controller
                     name="uf"
                     control={control}
+                    defaultValue={client.estado}
                     rules={{
                         required: true
                     }}

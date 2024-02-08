@@ -5,13 +5,12 @@ import { sum } from "lodash";
 import { useEffect, useState } from "react";
 import { Controller } from "react-hook-form";
 
-export default function NewSale({ control, itensArray, setItensArray, setValue }) {
+export default function EditSale({ control, itensArray, setItensArray, setValue, order }) {
 
     const [loading, setLoading] = useState(true)
-    const [valor, setValor] = useState(' ')
-    const [inputValue, setInputValue] = useState('')
-    const [adress, setAdress] = useState('')
-    const [city, setCity] = useState('')
+    const [client, setClient] = useState('')
+    const [adress, setAdress] = useState('' || order.adress)
+    const [city, setCity] = useState('' || order.city)
     const [name, SetName] = useState('')
     const [quantity, setQuantity] = useState('')
     const [material, setMaterial] = useState('')

@@ -6,7 +6,7 @@ import { DeleteOutline, Edit } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import DeleteConfirmationModal from "../Cadastro/DeleteConfirmationModal";
 
-export default function ClientList() {
+export default function OrdersList() {
     const [loading, setLoading] = useState(true)
     const [rows, setRows] = useState([]);
     const [selectedIds, setSelectedIds] = useState([]);
@@ -14,24 +14,27 @@ export default function ClientList() {
 
     const getRows = async () => {
         try {
-            const response = await axios.get('http://localhost:3500/clients', {
+            const response = await axios.get('http://localhost:3500/orders', {
                 headers: {
                     "Authorization": localStorage.getItem('token')
                 }
             })
-            const clients = await response.data
+            const orders = await response.data
 
-            const mappedRows = clients.map((client, idx) => ({
+            const mappedRows = orders.map((order, idx) => ({
                 id: idx + 1,
-                razao_nome: client.razao || client.nome,
-                cnpj_cpf: client.cnpj || client.cpf,
-                endereco: `${client.endereco} ${client.numero}`,
-                cidade: client.cidade,
-                uf: client.estado,
-                inscricao_estadual: client.inscricao_estadual || ' ',
-                tipo: client.cnpj ? 'Júridico' : 'Físico'
+                orderId: order._id,
+                client: order.clientInfo[0].razao || order.clientInfo[0].nome,
+                cnpj_cpf: order.clientInfo[0].cnpj || order.clientInfo[0].cpf,
+                city: order.city,
+                adress: order.adress,
+                budget: order.budget,
+                step: order.step,
+                date: new Date(order.Date),
+                delivered: order.delivered,
+                canceled: order.canceled
             }));
-
+            console.log(typeof mappedRows[0].date)
             setRows(mappedRows)
             setLoading(false)
         } catch (error) {
@@ -48,13 +51,13 @@ export default function ClientList() {
     };
 
     const handleRowSelectionChange = (newSelection) => {
-        const selectedCNPJs = newSelection.map(index => rows[index - 1]?.cnpj_cpf).filter(Boolean)
-        setSelectedIds(selectedCNPJs);
+        const selectedIds = newSelection.map(index => rows[index - 1]?.orderId).filter(Boolean)
+        setSelectedIds(selectedIds);
     }
 
     const EditButton = ({ id }) => (
         <IconButton
-            href={`http://localhost:3000/clientes/${id}`}
+            href={`http://localhost:3000/orders/${id}`}
         >
             <Edit/>
         </IconButton>
@@ -62,16 +65,18 @@ export default function ClientList() {
 
     function showDataGrid() {
         const columns = [
-            { field: 'razao_nome', headerName: 'Razão Social / Nome', width: 300 },
-            { field: 'cnpj_cpf', headerName: 'CNPJ / CPF', width: 150 },
-            { field: 'endereco', headerName: 'Endereço', width: 300 },
-            { field: 'cidade', headerName: 'Cidade', width: 200 },
-            { field: 'uf', headerName: 'UF', width: 100 },
-            { field: 'inscricao_estadual', headerName: 'Inscrição Estadual', width: 150 },
-            { field: 'tipo', headerName: 'Tipo', width: 100 },
+            { field: 'client', headerName: 'Razao/Nome', width: 150 },
+            { field: 'cnpj_cpf', headerName: 'CNPJ / CPF', width: 150},
+            { field: 'city', headerName: 'Cidade', width: 150 },
+            { field: 'adress', headerName: 'Endereço', width: 300, align: 'center' },
+            { field: 'budget', headerName: 'Orçamento', width: 100, type: 'boolean' },
+            { field: 'step', headerName: 'Passo', width: 150, headerAlign: 'center' },
+            { field: 'date', headerName: 'Data do Pedido', width: 150, type: 'date', align: 'center', headerAlign: 'center' },
+            { field: 'delivered', headerName: 'Entregue', width: 100, type: 'boolean' },
+            { field: 'canceled', headerName: 'Cancelado', width: 100, type: 'boolean' },
             {
                 field: 'edit', headerName: 'Editar', width: 100, disableColumnMenu: true, filterable: false, hideable: false, sortable: false,
-                renderCell: (params) => <EditButton id={params.row.cnpj_cpf} />
+                renderCell: (params) => <EditButton id={params.row.orderId} />
             },
             {
                 field: 'delete', width: 100, sortable: false, menubar: false, disableColumnMenu: true,
@@ -103,15 +108,8 @@ export default function ClientList() {
             }
         ]
         const formattedRows = rows.map((client, idx) => {
-            let row = {}
-            row.id = idx + 1
-            row.razao_nome = client.razao_nome
-            row.cnpj_cpf = client.cnpj_cpf
-            row.endereco = `${client.endereco}`
-            row.cidade = client.cidade
-            row.uf = client.uf
-            row.inscricao_estadual = client.inscricao_estadual,
-                row.tipo = client.tipo === 'Júridico' ? 'Jurídica' : 'Física'
+            let row = client
+            row.key = idx + 1
             return row
         })
 
@@ -125,7 +123,6 @@ export default function ClientList() {
             selectedIds={selectedIds}
             title={<>Excluindo {selectedIds.length} registros</>}
             setSelectedIds={setSelectedIds}
-            url={'http://localhost:3500/clients/delete'}
             />
             <DataGrid
                 rows={formattedRows}
