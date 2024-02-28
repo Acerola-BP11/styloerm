@@ -4,10 +4,13 @@ import NewSale from "@/components/Cadastro/CadastroVenda";
 import DarkTheme from "@/components/darkTheme";
 import { Button, MenuItem, Select } from "@mui/material";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function NewOrder() {
+
+    const router = useRouter()
 
     const [type, setType] = useState('venda')
     const [itensArray, setItensArray] = useState([])
@@ -33,6 +36,7 @@ export default function NewOrder() {
                 "Authorization": localStorage.getItem('token')
             }
         })
+        await router.push('/')
         .catch(e => {
             alert(e)
         })

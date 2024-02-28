@@ -1,13 +1,12 @@
 import { Delete } from "@mui/icons-material";
-import { Autocomplete, Button, Divider, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
+import { Button, Divider, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import { sum } from "lodash";
 import { useEffect, useState } from "react";
 import { Controller } from "react-hook-form";
 
-export default function EditSale({ control, itensArray, setItensArray, setValue, order }) {
+export default function EditSale({ control, itensArray, setItensArray, setValue, order, editing }) {
 
-    const [loading, setLoading] = useState(true)
     const [client, setClient] = useState('')
     const [adress, setAdress] = useState('' || order.adress)
     const [city, setCity] = useState('' || order.city)
@@ -21,7 +20,6 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
     const [finishing, setFinishing] = useState('')
     const [unitaryPrice, setUnitaryPrice] = useState('')
     const [totalPrice, setTotalPrice] = useState('')
-    const [clientsArray, setClientsArray] = useState([])
 
     const disableArrowSx = {
         "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": {
@@ -68,32 +66,6 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
         clearItemInput()
     }
 
-    const getClientsData = async () => {
-        const clients = await axios.get('http://localhost:3500/clients/autoFill', {
-            headers: {
-                "Authorization": localStorage.getItem('token')
-            }
-        })
-        setClientsArray(clients.data)
-        setLoading(false)
-    }
-
-    useEffect(() => {
-        getClientsData()
-    }, [])
-
-    const updateCityAndAdress = (newValue) => {
-        if (newValue) {
-            setValue('cidade', newValue.cidade)
-            setValue('endereco', newValue.endereco)
-            setAdress(newValue.endereco)
-            setCity(newValue.cidade)
-        } else {
-            setAdress('')
-            setCity('')
-        }
-    }
-
     const updateTotalPrice = () => {
         if (unitaryPrice && quantity) {
             const totalPrice = quantity * unitaryPrice
@@ -105,6 +77,24 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
         return sum(itensArray.map(item => parseFloat(item.totalPrice) || 0))
     }
 
+    const getClientsData = async () => {
+        const clients = await axios.get(`http://localhost:3500/clients/id/${order.client}`, {
+            headers: {
+                "Authorization": localStorage.getItem('token')
+            }
+        })
+        setClient(clients.data)
+        console.log(client)
+        setValue('cliente', `${client.cnpj || client.cpf} - ${client.razao || client.nome}`)
+        setValue('endereco', client.adress)
+        setValue('cidade', client.city)
+    }
+
+    useEffect(() => {
+        getClientsData()
+        setItensArray(order.itens)
+    }, [])
+
     return (
         <div
             className="flex flex-col justify-evenly m-2 h-full"
@@ -112,28 +102,13 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
             <div className="h-full w-full flex flex-row justify-between mb-5">
                 <Controller
                     render={({ field: { onChange, ...field } }) => (
-                        <Autocomplete
+                        <TextField
                             {...field}
-                            value={valor}
-                            onChange={(event, newValue) => {
-                                console.log(newValue)
-                                newValue? setValue('cliente', newValue.clientId) : setValue('cliente', null)
-                                setValor(newValue)
-                                updateCityAndAdress(newValue)
-                            }}
-                            inputValue={inputValue}
-                            onInputChange={(event, newInputValue) => {
-                                setInputValue(newInputValue)
-                            }}
-                            disablePortal
+                            value={`${client.cnpj || client.cpf} - ${client.razao || client.nome}`}
                             id="cliente"
-                            options={clientsArray}
-                            isOptionEqualToValue={(option, value) => option.razao_nome ? option.razao_nome + ' - ' + option.cnpj_cpf : '' === value}
-                            getOptionLabel={client => client.razao_nome ? client.razao_nome + ' - ' + client.cnpj_cpf : ''}
-                            renderInput={(params) => <TextField {...params} label="Cliente" />}
-                            loading={loading}
                             fullWidth
                             required
+                            disabled
                         />
                     )}
                     control={control}
@@ -160,6 +135,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                             className="w-5/12"
                             inputMode="text"
                             label="Cidade"
+                            disabled={!editing}
                             value={city}
                             onChange={e => {
                                 setCity(e.target.value)
@@ -182,6 +158,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                             className="w-5/12"
                             inputMode="text"
                             label="Endereço"
+                            disabled={!editing}
                             value={adress}
                             onChange={e => {
                                 setAdress(e.target.value)
@@ -214,6 +191,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                         label="Produto"
                         inputMode="text"
                         value={name}
+                        disabled={!editing}
                         onChange={e => {
                             SetName(e.target.value)
                         }}
@@ -223,6 +201,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                         label="Quantidade"
                         type="number"
                         value={quantity}
+                        disabled={!editing}
                         onChange={e => {
                             setQuantity(e.target.value)
                         }}
@@ -235,6 +214,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                     <TextField
                         label="Tecido"
                         inputMode="text"
+                        disabled={!editing}
                         value={material}
                         onChange={e => {
                             setMaterial(e.target.value)
@@ -244,6 +224,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                     <TextField
                         label="Cor"
                         inputMode="text"
+                        disabled={!editing}
                         value={color}
                         onChange={e => {
                             setCode(e.target.value)
@@ -253,6 +234,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                     <TextField
                         label="Desenho"
                         inputMode="text"
+                        disabled={!editing}
                         value={pattern}
                         onChange={e => {
                             setPattern(e.target.value)
@@ -262,6 +244,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                     <TextField
                         label="Cod Desenho"
                         inputMode="text"
+                        disabled={!editing}
                         value={patternCode}
                         onChange={e => {
                             setPatternCode(e.target.value)
@@ -271,6 +254,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                     <TextField
                         label="Tamanho"
                         inputMode="text"
+                        disabled={!editing}
                         value={size}
                         onChange={e => {
                             setSize(e.target.value)
@@ -280,6 +264,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                     <TextField
                         label="Acabamento"
                         inputMode="text"
+                        disabled={!editing}
                         value={finishing}
                         onChange={e => {
                             setFinishing(e.target.value)
@@ -289,6 +274,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                     <TextField
                         label="Preço Unitário"
                         type="number"
+                        disabled={!editing}
                         value={unitaryPrice}
                         onChange={e => {
                             setUnitaryPrice(e.target.value)
@@ -312,6 +298,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                             className="mr-12 border-red-600 text-gray-200"
                             variant="outlined"
                             onClick={clearItemInput}
+                            disabled={!editing}
                         >
                             Limpar Campos
                         </Button>
@@ -319,6 +306,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                             className="mr-12"
                             variant="outlined"
                             onClick={addItem}
+                            disabled={!editing}
                         >
                             Adicionar Item
                         </Button>
@@ -378,6 +366,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                                                 onClick={() => {
                                                     handleDelete(idx)
                                                 }}
+                                                disabled={!editing}
                                             >
                                                 <Delete
                                                     className="text-red-700"

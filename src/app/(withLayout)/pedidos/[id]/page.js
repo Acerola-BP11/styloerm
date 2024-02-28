@@ -1,21 +1,22 @@
 'use client'
+import EditSale from "@/components/Edicao/EditOrder";
 import DarkTheme from "@/components/darkTheme";
 import { Edit } from "@mui/icons-material";
 import { Button, IconButton, Skeleton } from "@mui/material";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function EditClient({ params }) {
+    const [loading, setLoading] = useState(true)
     const [editing, setEditing] = useState(false)
     const { control, handleSubmit, setValue } = useForm()
-    const { order, setOrder } = useState({})
+    const [ order, setOrder ] = useState({})
     const [type, setType] = useState('venda')
     const [itensArray, setItensArray] = useState([])
 
-    const router = useRouter()
 
+    const onInvalid = (errors) => console.error(errors)
     const onSubmit = async (data) => {
         data.itens = itensArray
         const order = {
@@ -43,19 +44,20 @@ export default function EditClient({ params }) {
             })
             const orderData = await response.data
             setOrder(orderData)
+            setLoading(false)
         } catch (err) {
             alert(err)
         }
     }
 
     useEffect(() => {
-        getClientData()
+        getOrderData()
     }, [])
 
     return (
-        <div className="h-full w-full flex flex-col items-center justify-center">
+        <div className="h-full w-full flex flex-col items-center justify-center overflow-auto">
             <DarkTheme>
-                <div className="w-full h-auto flex justify-end p-5">
+                <div className="w-full h-auto flex justify-end p-5 overflow-hidden">
                     <IconButton
                         onClick={() => {
                             setEditing(!editing)
@@ -64,30 +66,21 @@ export default function EditClient({ params }) {
                         <Edit />
                     </IconButton>
                 </div>
-                <div className="w-11/12 h-5/6 border border-solid border-amber-800 p-5">
-                    <form onSubmit={handleSubmit(onSubmit)} className="h-max">
-                        {client ? (
-                            (
-                                client.cnpj ? (
-                                    <EditClientJurico
-                                        control={control}
-                                        client={client}
-                                        editing={editing}
-                                        setValue={setValue}
-                                    />
-                                ) : (
-                                    <EditClientFisico
-                                        control={control}
-                                        client={client}
-                                        editing={editing}
-                                        setValue={setValue}
-
-                                    />
-                                )
-                            )
-                        ) : (
-                            <Skeleton animation={"pulse"} />
+                <div className="w-11/12 h-5/6 border border-solid border-amber-800 p-5 overflow-auto">
+                    <form onSubmit={handleSubmit(onSubmit, onInvalid)} className="h-max">
+                        {!loading ? (
+                            <EditSale
+                            order={order}
+                            control={control}
+                            itensArray={itensArray}
+                            setItensArray={setItensArray}
+                            setValue={setValue}
+                            editing={editing}
+                            />
                         )
+                            : (
+                                <Skeleton animation={"pulse"} />
+                            )
                         }
                         <div className="h-full w-full flex justify-end items-end">
                             {editing &&

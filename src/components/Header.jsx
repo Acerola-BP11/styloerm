@@ -9,9 +9,12 @@ import { Box, Button, Divider, Menu, MenuItem } from '@mui/material'
 import { ArrowDropDown, ArrowRight } from '@mui/icons-material'
 import axios from 'axios'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 function Header() {
 
+
+  const router = useRouter()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [user, setUser] = useState(null)
 
@@ -37,6 +40,7 @@ function Header() {
     setUser(null)
     localStorage.clear()
     handleClose()
+    router.push('/login')
   }
 
   return (
@@ -112,7 +116,7 @@ function Header() {
             <Link href="/" className="-m-1.5 p-1.5">
               <img
                 className="h-auto w-20"
-                src="/images/logo_transparente.png/"
+                src="images\logo-no-background.svg"
                 alt="Logo"
               />
             </Link>
@@ -139,6 +143,12 @@ function Header() {
                 >
                   Pedidos
                 </Link>
+                <Button
+                  onClick={handleLogout}
+                  className="-mx-3 block rounded-lg px-3 py-2 text-sm font-semibold leading-7 text-anti-flash-white hover:bg-hover-blue text-white border border-white border-solid bg-red-700 w-1/5 text-center"
+                >
+                  Sair
+                </Button>
               </div>
               <div className="py-6">
 

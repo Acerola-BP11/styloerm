@@ -23,10 +23,11 @@ export default function OrdersList() {
 
             const mappedRows = orders.map((order, idx) => ({
                 id: idx + 1,
-                orderId: order._id,
+                orderId: order.orderId,
                 client: order.clientInfo[0].razao || order.clientInfo[0].nome,
                 cnpj_cpf: order.clientInfo[0].cnpj || order.clientInfo[0].cpf,
                 city: order.city,
+                uf: order.clientInfo[0].estado,
                 adress: order.adress,
                 budget: order.budget,
                 step: order.step,
@@ -57,7 +58,7 @@ export default function OrdersList() {
 
     const EditButton = ({ id }) => (
         <IconButton
-            href={`http://localhost:3000/orders/${id}`}
+            href={`http://localhost:3000/pedidos/${id}`}
         >
             <Edit/>
         </IconButton>
@@ -65,12 +66,14 @@ export default function OrdersList() {
 
     function showDataGrid() {
         const columns = [
-            { field: 'client', headerName: 'Razao/Nome', width: 150 },
+            {field: 'orderId', headerName: 'ID', width: 75, align: 'center', headerAlign: 'center' },
+            { field: 'client', headerName: 'Razao/Nome', width: 200 },
             { field: 'cnpj_cpf', headerName: 'CNPJ / CPF', width: 150},
             { field: 'city', headerName: 'Cidade', width: 150 },
-            { field: 'adress', headerName: 'Endereço', width: 300, align: 'center' },
-            { field: 'budget', headerName: 'Orçamento', width: 100, type: 'boolean' },
-            { field: 'step', headerName: 'Passo', width: 150, headerAlign: 'center' },
+            { field: 'adress', headerName: 'Endereço', width: 250, align: 'left' },
+            { field: 'uf', headerName: 'UF', width: 50, align: 'center' },
+            { field: 'budget', headerName: 'Orçamento', width: 90, type: 'boolean' },
+            // { field: 'step', headerName: 'Passo', width: 150, headerAlign: 'center' },
             { field: 'date', headerName: 'Data do Pedido', width: 150, type: 'date', align: 'center', headerAlign: 'center' },
             { field: 'delivered', headerName: 'Entregue', width: 100, type: 'boolean' },
             { field: 'canceled', headerName: 'Cancelado', width: 100, type: 'boolean' },
@@ -117,12 +120,13 @@ export default function OrdersList() {
             <>
             <DeleteConfirmationModal
             onDelete={getRows}
-            text={<>Confirmar exclusão de {(selectedIds.length)} clientes, está ação é <strong>Irreversível</strong></>}
+            text={<>Confirmar o cancelamento de {(selectedIds.length)} pedidos, está ação é <strong>Irreversível</strong></>}
             confirmationModalOpen={confirmationModalOpen}
             setConfirmationModalOpen={setConfirmationModalOpen}
             selectedIds={selectedIds}
             title={<>Excluindo {selectedIds.length} registros</>}
             setSelectedIds={setSelectedIds}
+            url={'http://localhost:3500/orders/cancel'}
             />
             <DataGrid
                 rows={formattedRows}
