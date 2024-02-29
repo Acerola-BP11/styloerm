@@ -16,6 +16,8 @@
     "@mui/icons-material": "^5.14.12",
     "@mui/material": "^5.14.12",
     "@mui/x-data-grid": "^6.16.1",
+    "@vercel/analytics": "^1.2.2",
+    "@vercel/speed-insights": "^1.0.10",
     "axios": "^1.6.7",
     "debug": "^4.3.4",
     "lodash": "^4.17.21",

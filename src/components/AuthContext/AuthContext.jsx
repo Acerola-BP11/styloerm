@@ -1,6 +1,7 @@
 'use client'
 import axios from "axios"
 import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 
 export default function AuthContext({ children }) {
     const router = useRouter()
@@ -15,9 +16,12 @@ export default function AuthContext({ children }) {
         }
     })
 
-    if(!localStorage.getItem('token')){
-        router.push('/login')
-    }
+    useEffect(() => {
+        username = localStorage.getItem('token')
+        if(!token){
+            router.push('/login')
+        }
+      }, [])
 
     return(
         <>
