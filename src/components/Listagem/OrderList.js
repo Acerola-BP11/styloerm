@@ -58,7 +58,7 @@ export default function OrdersList() {
 
     const EditButton = ({ id }) => (
         <IconButton
-            href={`https://styloapi.vercel.app/pedidos/${id}`}
+            href={`https://styloerm.vercel.app/pedidos/${id}`}
         >
             <Edit/>
         </IconButton>

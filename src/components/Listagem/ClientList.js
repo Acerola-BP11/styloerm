@@ -54,7 +54,7 @@ export default function ClientList() {
 
     const EditButton = ({ id }) => (
         <IconButton
-            href={`https://styloapi.vercel.app/clientes/${id}`}
+            href={`https://styloerm.vercel.app/clientes/${id}`}
         >
             <Edit/>
         </IconButton>
