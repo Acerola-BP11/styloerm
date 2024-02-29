@@ -17,7 +17,7 @@ export default function AuthContext({ children }) {
     })
 
     useEffect(() => {
-        username = localStorage.getItem('token')
+        const token = localStorage.getItem('token')
         if(!token){
             router.push('/login')
         }
