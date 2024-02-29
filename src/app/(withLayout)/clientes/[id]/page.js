@@ -54,20 +54,20 @@ export default function EditClient({ params }) {
         }
         try {
             if (client.cnpj) {
-                await axios.put(`http://localhost:3500/clients/cnpj/${client.cnpj}`, editData, {
+                await axios.put(`https://styloapi.vercel.app/clients/cnpj/${client.cnpj}`, editData, {
                     headers: {
                         "Authorization": localStorage.getItem('token')
                     }
                 })
             } else {
-                await axios.put(`http://localhost:3500/clients/physical/${client.cpf}`, editData, {
+                await axios.put(`https://styloapi.vercel.app/clients/physical/${client.cpf}`, editData, {
                     headers: {
                         "Authorization": localStorage.getItem('token')
                     }
                 })
             }
             setEditing(false)
-            router.push('http://localhost:3000/clientes/lista')
+            router.push('/clientes/lista')
         } catch (error) {
             alert(error)
         }
@@ -75,7 +75,7 @@ export default function EditClient({ params }) {
 
     const getClientData = async () => {
         try {
-            const response = await axios.get(`http://localhost:3500/clients/${params.id}`, {
+            const response = await axios.get(`https://styloapi.vercel.app/clients/${params.id}`, {
                 headers: {
                     "Authorization": localStorage.getItem('token')
                 }

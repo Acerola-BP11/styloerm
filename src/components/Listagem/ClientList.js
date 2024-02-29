@@ -14,7 +14,7 @@ export default function ClientList() {
 
     const getRows = async () => {
         try {
-            const response = await axios.get('http://localhost:3500/clients', {
+            const response = await axios.get('https://styloapi.vercel.app/clients', {
                 headers: {
                     "Authorization": localStorage.getItem('token')
                 }
@@ -54,7 +54,7 @@ export default function ClientList() {
 
     const EditButton = ({ id }) => (
         <IconButton
-            href={`http://localhost:3000/clientes/${id}`}
+            href={`https://styloapi.vercel.app/clientes/${id}`}
         >
             <Edit/>
         </IconButton>
@@ -125,7 +125,7 @@ export default function ClientList() {
             selectedIds={selectedIds}
             title={<>Excluindo {selectedIds.length} registros</>}
             setSelectedIds={setSelectedIds}
-            url={'http://localhost:3500/clients/delete'}
+            url={'https://styloapi.vercel.app/clients/delete'}
             />
             <DataGrid
                 rows={formattedRows}

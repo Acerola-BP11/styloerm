@@ -78,7 +78,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
     }
 
     const getClientsData = async () => {
-        const clients = await axios.get(`http://localhost:3500/clients/id/${order.client}`, {
+        const clients = await axios.get(`https://styloapi.vercel.app/clients/id/${order.client}`, {
             headers: {
                 "Authorization": localStorage.getItem('token')
             }

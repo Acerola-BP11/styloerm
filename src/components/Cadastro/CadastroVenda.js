@@ -70,7 +70,7 @@ export default function NewSale({ control, itensArray, setItensArray, setValue }
     }
 
     const getClientsData = async () => {
-        const clients = await axios.get('http://localhost:3500/clients/autoFill', {
+        const clients = await axios.get('https://styloapi.vercel.app/clients/autoFill', {
             headers: {
                 "Authorization": localStorage.getItem('token')
             }

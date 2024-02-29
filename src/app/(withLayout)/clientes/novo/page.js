@@ -52,7 +52,7 @@ export default function CadastrarClientes() {
             }
         }
         try {
-            const url = tipoCadastro == 'juridica' ? 'http://localhost:3500/clients/cnpj' : 'http://localhost:3500/clients/physical'
+            const url = tipoCadastro == 'juridica' ? 'https://styloapi.vercel.app/clients/cnpj' : 'https://styloapi.vercel.app/clients/physical'
             await axios.post(url, client,
                 {
                     headers: {
@@ -61,7 +61,7 @@ export default function CadastrarClientes() {
                 }
             
             )
-            router.push('http://localhost:3000/clientes/lista')
+            router.push('/clientes/lista')
         } catch (error) {
             alert('Ocorreu um erro ao salvar o cliente!')
         }

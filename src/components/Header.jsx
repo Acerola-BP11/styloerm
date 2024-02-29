@@ -32,7 +32,7 @@ function Header() {
     setOpen(false)
   }
   const handleLogout = async () => {
-    await axios.get('http://localhost:3500/user/logout', {
+    await axios.get('https://styloapi.vercel.app/user/logout', {
       headers: {
         "Authorization": localStorage.getItem('token')
       }

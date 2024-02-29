@@ -4,6 +4,7 @@ import DarkTheme from "@/components/darkTheme";
 import { Edit } from "@mui/icons-material";
 import { Button, IconButton, Skeleton } from "@mui/material";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -15,6 +16,7 @@ export default function EditClient({ params }) {
     const [type, setType] = useState('venda')
     const [itensArray, setItensArray] = useState([])
 
+    const router = useRouter()
 
     const onInvalid = (errors) => console.error(errors)
     const onSubmit = async (data) => {
@@ -28,7 +30,7 @@ export default function EditClient({ params }) {
         }
         try {
             setEditing(false)
-            // router.push('http://localhost:3000/clientes/lista')
+            router.push('/clientes/lista')
             console.log(order)
         } catch (error) {
             alert(error)
@@ -37,7 +39,7 @@ export default function EditClient({ params }) {
 
     const getOrderData = async () => {
         try {
-            const response = await axios.get(`http://localhost:3500/orders/${params.id}`, {
+            const response = await axios.get(`https://styloapi.vercel.app/${params.id}`, {
                 headers: {
                     "Authorization": localStorage.getItem('token')
                 }

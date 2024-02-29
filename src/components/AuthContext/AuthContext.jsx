@@ -15,6 +15,10 @@ export default function AuthContext({ children }) {
         }
     })
 
+    if(!localStorage.getItem('token')){
+        router.push('/login')
+    }
+
     return(
         <>
         {children}

@@ -13,7 +13,7 @@ export default function Register() {
     const { handleSubmit, control } = useForm()
 
     const onSubmit = async (data) => {
-        await axios.post('http://styloapi.vercel.app/user', { email: data.email, username: data.nome })
+        await axios.post('https://styloapi.vercel.app/user', { email: data.email, username: data.nome })
         setOpen(true)
     }
 

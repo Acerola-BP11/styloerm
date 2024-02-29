@@ -31,7 +31,7 @@ export default function NewOrder() {
             itens: data.itens,
             budget: type === 'cotacao' ? true : false
         }
-        await axios.post('http://localhost:3500/orders', order, {
+        await axios.post('https://styloapi.vercel.app/orders', order, {
             headers: {
                 "Authorization": localStorage.getItem('token')
             }

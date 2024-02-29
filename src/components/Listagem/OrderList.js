@@ -14,7 +14,7 @@ export default function OrdersList() {
 
     const getRows = async () => {
         try {
-            const response = await axios.get('http://localhost:3500/orders', {
+            const response = await axios.get('https://styloapi.vercel.app/orders', {
                 headers: {
                     "Authorization": localStorage.getItem('token')
                 }
@@ -58,7 +58,7 @@ export default function OrdersList() {
 
     const EditButton = ({ id }) => (
         <IconButton
-            href={`http://localhost:3000/pedidos/${id}`}
+            href={`https://styloapi.vercel.app/pedidos/${id}`}
         >
             <Edit/>
         </IconButton>
