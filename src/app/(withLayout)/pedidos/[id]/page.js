@@ -39,7 +39,7 @@ export default function EditClient({ params }) {
 
     const getOrderData = async () => {
         try {
-            const response = await axios.get(`https://styloapi.vercel.app/${params.id}`, {
+            const response = await axios.get(`https://styloapi.vercel.app/orders/${params.id}`, {
                 headers: {
                     "Authorization": localStorage.getItem('token')
                 }
