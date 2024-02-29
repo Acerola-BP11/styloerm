@@ -17,7 +17,7 @@ export default function Login() {
     const onSubmit = async (data) => {
         const {email, password} = data
 
-        await axios.post('http://styloapi.vercel.app/user/login', {email, password})
+        await axios.post('https://styloapi.vercel.app/user/login', {email, password})
         .then((response) => {
             const { sessionToken, username } = response.data
             localStorage.setItem('token', sessionToken)
