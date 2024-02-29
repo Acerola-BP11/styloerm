@@ -13,7 +13,7 @@ export default function Register() {
     const { handleSubmit, control } = useForm()
 
     const onSubmit = async (data) => {
-        await axios.post('https://styloapi.vercel.app/user', { email: data.email, username: data.name })
+        await axios.post('https://styloapi.vercel.app/user', { email: data.email, username: data.name, password: data.password })
         setOpen(true)
     }
 
@@ -66,6 +66,20 @@ export default function Register() {
                                     name="email"
                                     placeholder="E-mail"
                                     type="email"
+                                    fullWidth
+                                    className="mt-5"
+                                />
+                            )}
+                        />
+                        <Controller
+                            name="password"
+                            control={control}
+                            render={({ field }) => (
+                                <TextField
+                                    {...field}
+                                    name="password"
+                                    placeholder="Senha"
+                                    type="password"
                                     fullWidth
                                     className="mt-5"
                                 />
