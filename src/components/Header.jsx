@@ -53,6 +53,8 @@ function Header() {
               className="h-20 w-auto mx-10"
               src="/images/logo-no-background.svg"
               alt="logo"
+              width={20}
+              height={40}
             />
           </Link>
         </div>
@@ -123,6 +125,8 @@ function Header() {
                 className="h-auto w-20"
                 src="images\logo-no-background.svg"
                 alt="Logo"
+                width={20}
+                height={40}
               />
             </Link>
             <button
