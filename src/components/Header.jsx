@@ -123,7 +123,7 @@ function Header() {
             <Link href="/" className="-m-1.5 p-1.5">
               <Image
                 className="h-auto w-20"
-                src="images\logo-no-background.svg"
+                src="/images/logo-no-background.svg"
                 alt="Logo"
                 width={20}
                 height={40}
@@ -152,12 +152,12 @@ function Header() {
                 >
                   Pedidos
                 </Link>
-                <Button
+                <button
                   onClick={handleLogout}
                   className="-mx-3 block rounded-lg px-3 py-2 text-sm font-semibold leading-7 text-anti-flash-white hover:bg-hover-blue text-white border border-white border-solid bg-red-700 w-1/5 text-center visited:none"
                 >
                   Sair
-                </Button>
+                </button>
               </div>
               <div className="py-6">
 
