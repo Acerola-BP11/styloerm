@@ -141,7 +141,7 @@ export default function ClientList() {
 
     return (
         <div className="h-full w-full m-5">
-            {loading ? <p>Carregando</p> : (
+            {loading ? <p className="text-white font-bold">Carregando</p> : (
                 showDataGrid()
             )}
         </div>

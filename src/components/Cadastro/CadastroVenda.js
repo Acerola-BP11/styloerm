@@ -204,7 +204,7 @@ export default function NewSale({ control, itensArray, setItensArray, setValue }
                 >
                     <Typography
                         fontSize={'20px'}
-                        className="text-center w-full"
+                        className="text-center w-full text-white"
                     >
                         Cadastro de Item
                     </Typography>
@@ -337,7 +337,7 @@ export default function NewSale({ control, itensArray, setItensArray, setValue }
                     >
                         <Typography
                             fontSize={'20px'}
-                            className="text-center"
+                            className="text-center text-white"
                         >
                             Itens
                         </Typography>
