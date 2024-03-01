@@ -67,7 +67,9 @@ export default function Register() {
                                     placeholder="E-mail"
                                     type="email"
                                     fullWidth
-                                    className="mt-5"
+                                    style={{
+                                        marginTop: '20px'
+                                    }}
                                 />
                             )}
                         />

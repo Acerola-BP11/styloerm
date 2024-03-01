@@ -52,7 +52,6 @@ export default function Login() {
                             )}
                         />
                         <Controller
-                        
                         name='password'
                         control={control}
                         render={({field}) => (
@@ -60,7 +59,9 @@ export default function Login() {
                             placeholder="Senha"
                             type="password"
                             fullWidth
-                            className="mt-5"
+                            style={{
+                                marginTop: '20px'
+                            }}
                             error={error}
                             {...field}
                         />
