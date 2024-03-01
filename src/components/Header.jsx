@@ -134,7 +134,7 @@ function Header() {
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+              <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true" />
             </button>
           </div>
           <div className="mt-6 flow-root">
@@ -154,7 +154,7 @@ function Header() {
                 </Link>
                 <Button
                   onClick={handleLogout}
-                  className="-mx-3 block rounded-lg px-3 py-2 text-sm font-semibold leading-7 text-anti-flash-white hover:bg-hover-blue text-white border border-white border-solid bg-red-700 w-1/5 text-center"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-sm font-semibold leading-7 text-anti-flash-white hover:bg-hover-blue text-white border border-white border-solid bg-red-700 w-1/5 text-center visited:none"
                 >
                   Sair
                 </Button>
