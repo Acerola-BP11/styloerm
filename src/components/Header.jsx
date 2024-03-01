@@ -10,6 +10,7 @@ import { ArrowDropDown, ArrowRight } from '@mui/icons-material'
 import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 function Header() {
 
@@ -48,7 +49,11 @@ function Header() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
-            <img className="h-20 w-auto mx-10" src="/images/logo-no-background.svg" alt="logo" />
+            <Image
+              className="h-20 w-auto mx-10"
+              src="/images/logo-no-background.svg"
+              alt="logo"
+            />
           </Link>
         </div>
         <div className="flex lg:hidden">
@@ -114,7 +119,7 @@ function Header() {
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-amber-800 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <Link href="/" className="-m-1.5 p-1.5">
-              <img
+              <Image
                 className="h-auto w-20"
                 src="images\logo-no-background.svg"
                 alt="Logo"
