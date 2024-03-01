@@ -57,14 +57,14 @@ function Header() {
             className="m-2 inline-flex items-center justify-center rounded-md p-2.5 text-anti-flash-white"
             onClick={() => setMobileMenuOpen(true)}
           >
-            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+            <Bars3Icon className="h-6 w-6 text-white" aria-hidden="true" />
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-16">
-          <Link href="/clientes" className="text-lg font-semibold leading-6 text-anti-flash-white">
+          <Link href="/clientes" className="text-lg font-semibold leading-6 text-white">
             Clientes
           </Link>
-          <Link href="/pedidos" className="text-lg font-semibold leading-6 text-anti-flash-white">
+          <Link href="/pedidos" className="text-lg font-semibold leading-6 text-white">
             Pedidos
           </Link>
         </Popover.Group>
@@ -133,13 +133,13 @@ function Header() {
               <div className="space-y-2 py-6">
                 <Link
                   href="/clientes"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-anti-flash-white hover:bg-hover-blues"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-hover-blues"
                 >
                   Clientes
                 </Link>
                 <Link
                   href="/pedidos"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-anti-flash-white hover:bg-hover-blue"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-hover-blue"
                 >
                   Pedidos
                 </Link>
