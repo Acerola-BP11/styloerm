@@ -125,7 +125,7 @@ export default function OrdersList() {
             selectedIds={selectedIds}
             title={<>Excluindo {selectedIds.length} registros</>}
             setSelectedIds={setSelectedIds}
-            url={'http://localhost:3500/orders/cancel'}
+            url={'https://styloapi.vercel.app/orders/cancel'}
             />
             <DataGrid
                 rows={formattedRows}
