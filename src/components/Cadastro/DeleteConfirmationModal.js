@@ -8,7 +8,7 @@ export default function DeleteConfirmationModal({ selectedIds, text, onDelete, c
         setConfirmationModalOpen(false)
     }
     const handleConfirm = async () => {
-        await axios.delete(url, { data: { ids: selectedIds }, headers: {
+        await axios.delete(url, { data: { selectedIds }, headers: {
             "Authorization": localStorage.getItem('token')
         } })
         setSelectedIds([])

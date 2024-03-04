@@ -3,8 +3,10 @@ import { TextField } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
+import { hasSpecialCharacters } from "../../../public/util";
 
 export default function CadastroPessoaJuridica({ control, setValue }) {
+
     const [cidade, setCidade] = useState('');
     const [endereco, setEndereco] = useState('');
     const [bairro, setBairro] = useState('');
@@ -74,17 +76,24 @@ export default function CadastroPessoaJuridica({ control, setValue }) {
 
 
             <Controller
-                render={({ field }) => (
+                render={({ field: {onChange, ...field} }) => (
                     <TextField
                         {...field}
                         id="cnpj"
                         label="CNPJ"
                         variant="outlined"
                         color="primary"
-                        inputMode="numeric"
                         required
                         className="w-1/4"
                         margin="dense"
+                        type="text"
+                        inputProps={{ maxLength: 14 }}  
+                        onChange={e => {
+                            if(!hasSpecialCharacters(e.target.value)){
+                                setValue('cnpj', e.target.value)
+                                onChange(e)
+                            }
+                        }}
                     />
                 )}
                 control={control}
@@ -95,9 +104,9 @@ export default function CadastroPessoaJuridica({ control, setValue }) {
         <div className="flex flex-row justify-between mx-5 my-5">
 
             <Controller
-                render={({ field: {onBlur, ...renderProps} }) => (
+                render={({ field: {onBlur, onChange, ...field} }) => (
                     <TextField
-                        {...renderProps}
+                        {...field}
                         id="cep"
                         label="CEP"
                         variant="outlined"
@@ -109,6 +118,12 @@ export default function CadastroPessoaJuridica({ control, setValue }) {
                         onBlur={e => {
                             validaCep(e)
                             onBlur(e)
+                        }}
+                        onChange={e => {
+                            if(!hasSpecialCharacters(e.target.value)){
+                                setValue('cep', e.target.value)
+                                onChange(e)
+                            }
                         }}
                     />
                 )}
@@ -256,7 +271,6 @@ export default function CadastroPessoaJuridica({ control, setValue }) {
                         variant="outlined"
                         color="primary"
                         inputMode="tel"
-                        required
                         className="w-1/4"
                         margin="dense"
                     />
@@ -292,7 +306,8 @@ export default function CadastroPessoaJuridica({ control, setValue }) {
                 label="E-mail"
                 variant="outlined"
                 color="primary"
-                inputMode="text"
+                inputMode="email"
+                type="email"
                 className="w-1/4"
                 margin="dense"
             />
@@ -302,17 +317,22 @@ export default function CadastroPessoaJuridica({ control, setValue }) {
             />
 
             <Controller
-            render={({field}) => (
+            render={({field: {onChange, ...field}}) => (
                 <TextField
                 {...field}
                 id="inscricao_estadual"
                 label="Inscrição Estadual"
                 variant="outlined"
-                required
                 color="primary"
                 inputMode="text"
                 className="w-1/4"
                 margin="dense"
+                onChange={e => {
+                    if(!hasSpecialCharacters(e.target.value)){
+                        setValue('inscricao_estadual', e.target.value)
+                        onChange(e)
+                    }
+                }}
             />
     )}
             control={control}

@@ -24,10 +24,10 @@ export default function OrdersList() {
             const mappedRows = orders.map((order, idx) => ({
                 id: idx + 1,
                 orderId: order.orderId,
-                client: order.clientInfo[0].razao || order.clientInfo[0].nome,
-                cnpj_cpf: order.clientInfo[0].cnpj || order.clientInfo[0].cpf,
+                client: order.clientInfo[0]?.razao || order.clientInfo[0]?.nome || ' ',
+                cnpj_cpf: order.clientInfo[0]?.cnpj || order.clientInfo[0]?.cpf || ' ',
                 city: order.city,
-                uf: order.clientInfo[0].estado,
+                uf: order.clientInfo[0]?.estado || ' ',
                 adress: order.adress,
                 budget: order.budget,
                 step: order.step,
@@ -35,7 +35,6 @@ export default function OrdersList() {
                 delivered: order.delivered,
                 canceled: order.canceled
             }));
-            console.log(typeof mappedRows[0].date)
             setRows(mappedRows)
             setLoading(false)
         } catch (error) {

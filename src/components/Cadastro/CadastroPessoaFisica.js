@@ -3,6 +3,7 @@ import { TextField } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
+import { hasSpecialCharacters } from "../../../public/util";
 
 export default function CadastroPessoaFisica({ control, setValue }) {
     const [cidade, setCidade] = useState('');
@@ -56,17 +57,24 @@ export default function CadastroPessoaFisica({ control, setValue }) {
                 <Controller
                     name="cpf"
                     control={control}
-                    render={({ field }) => (
+                    render={({ field: {onChange, ...field} }) => (
                         <TextField
                             {...field}
                             id="cpf"
                             label="CPF"
                             variant="outlined"
                             color="primary"
-                            inputMode="numeric"
+                            inputMode="text"
                             required
                             className="w-1/4"
                             margin="dense"
+                            inputProps={{ maxLength: 11 }} 
+                            onChange={e => {
+                                if(!hasSpecialCharacters(e.target.value)){
+                                    setValue('cpf', e.target.value)
+                                    onChange(e)
+                                }
+                            }}
                         />
                     )}
                 />
@@ -81,7 +89,8 @@ export default function CadastroPessoaFisica({ control, setValue }) {
                             label="E-mail"
                             variant="outlined"
                             color="primary"
-                            inputMode="text"
+                            inputMode="email"
+                            type="email"
                             className="w-1/4"
                             margin="dense"
                         />
@@ -92,7 +101,7 @@ export default function CadastroPessoaFisica({ control, setValue }) {
                 <Controller
                     name="cep"
                     control={control}
-                    render={({ field: { onBlur, ...field } }) => (
+                    render={({ field: { onBlur, onChange, ...field } }) => (
                         <TextField
                             {...field}
                             id="cep"
@@ -106,6 +115,12 @@ export default function CadastroPessoaFisica({ control, setValue }) {
                             onBlur={e => {
                                 validaCep(e)
                                 onBlur(e)
+                            }}
+                            onChange={e => {
+                                if(!hasSpecialCharacters(e.target.value)){
+                                    setValue('cep', e.target.value)
+                                    onChange(e)
+                                }
                             }}
                         />
     )}
@@ -253,7 +268,6 @@ export default function CadastroPessoaFisica({ control, setValue }) {
                             variant="outlined"
                             color="primary"
                             inputMode="tel"
-                            required
                             className="w-1/4"
                             margin="dense"
                         />

@@ -5,10 +5,10 @@ import { useState } from "react";
 import { Controller } from "react-hook-form";
 
 export default function EditClientJurico({ control, client, editing, setValue }) {
-    const [ cidade, setCidade ] = useState(client.cidade || '')
-    const [ bairro, setBairro] = useState(client.bairro || '')
-    const [ endereco, setEndereco ] = useState(client.endereco || '')
-    const [ uf, setUf ] = useState(client.estado || '')
+    const [cidade, setCidade] = useState(client.cidade || '')
+    const [bairro, setBairro] = useState(client.bairro || '')
+    const [endereco, setEndereco] = useState(client.endereco || '')
+    const [uf, setUf] = useState(client.estado || '')
 
     const validaCep = async (evento) => {
         const cep = evento.target.value
@@ -57,7 +57,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                     rules={{
                         required: true
                     }}
-                    
+
                 />
 
                 <Controller
@@ -81,7 +81,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
 
 
                 <Controller
-                    render={({ field }) => (
+                    render={({ field: { onChange, ...field } }) => (
                         <TextField
                             {...field}
                             id="cnpj"
@@ -93,23 +93,27 @@ export default function EditClientJurico({ control, client, editing, setValue })
                             className="w-1/4"
                             margin="dense"
                             disabled={!editing}
+                            inputProps={{ maxLength: 14 }}
+                            onChange={e => {
+                                if (!hasSpecialCharacters(e.target.value)) {
+                                    setValue('cnpj', e.target.value)
+                                    onChange(e)
+                                }
+                            }}
                         />
                     )}
                     control={control}
                     name="cnpj"
                     defaultValue={client.cnpj}
-                    rules={{
-                        required: true
-                    }}                    
                 />
 
             </div>
             <div className="flex flex-row justify-between mx-5 my-5">
 
                 <Controller
-                    render={({ field: {onBlur, ...renderProps} }) => (
+                    render={({ field: { onBlur, onChange, ...field } }) => (
                         <TextField
-                            {...renderProps}
+                            {...field}
                             id="cep"
                             label="CEP"
                             variant="outlined"
@@ -123,6 +127,12 @@ export default function EditClientJurico({ control, client, editing, setValue })
                                 validaCep(e)
                                 onBlur(e)
                             }}
+                            onChange={e => {
+                                if (!hasSpecialCharacters(e.target.value)) {
+                                    setValue('cep', e.target.value)
+                                    onChange(e)
+                                }
+                            }}
                         />
                     )}
                     defaultValue={client.cep}
@@ -134,7 +144,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                 />
 
                 <Controller
-                    render={({ field: {onChange, ...field} }) => (
+                    render={({ field: { onChange, ...field } }) => (
                         <TextField
                             {...field}
                             id="cidade"
@@ -301,12 +311,11 @@ export default function EditClientJurico({ control, client, editing, setValue })
                             variant="outlined"
                             color="primary"
                             inputMode="tel"
-                            required
                             className="w-1/4"
                             margin="dense"
                             disabled={!editing}
                         />
-    )}
+                    )}
                     control={control}
                     name="telefone1"
                     defaultValue={client.telefone1}
@@ -316,66 +325,70 @@ export default function EditClientJurico({ control, client, editing, setValue })
                 />
 
                 <Controller
-                render={({field}) => (
-                    <TextField
-                    {...field}
-                    id="telefone2"
-                    label="Telefone 2"
-                    variant="outlined"
-                    color="primary"
-                    inputMode="tel"
-                    className="w-1/4"
-                    margin="dense"
-                    disabled={!editing}
-                />
-                )}
-                control={control}
-                name="telefone2"
-                defaultValue={client.telefone2}
+                    render={({ field }) => (
+                        <TextField
+                            {...field}
+                            id="telefone2"
+                            label="Telefone 2"
+                            variant="outlined"
+                            color="primary"
+                            inputMode="tel"
+                            className="w-1/4"
+                            margin="dense"
+                            disabled={!editing}
+                        />
+                    )}
+                    control={control}
+                    name="telefone2"
+                    defaultValue={client.telefone2}
                 />
             </div>
             <div className="flex flex-row justify-between mx-5 my-5">
-                
+
                 <Controller
-                render={({field}) => (
-                    <TextField
-                    {...field}
-                    id="email"
-                    label="E-mail"
-                    variant="outlined"
-                    color="primary"
-                    inputMode="text"
-                    className="w-1/4"
-                    margin="dense"
-                    disabled={!editing}
-                />
-                )}
-                control={control}
-                name="email"
-                defaultValue={client.email}
+                    render={({ field }) => (
+                        <TextField
+                            {...field}
+                            id="email"
+                            label="E-mail"
+                            variant="outlined"
+                            color="primary"
+                            inputMode="email"
+                            type="email"
+                            className="w-1/4"
+                            margin="dense"
+                            disabled={!editing}
+                        />
+                    )}
+                    control={control}
+                    name="email"
+                    defaultValue={client.email}
                 />
 
                 <Controller
-                render={({field}) => {
-                    <TextField
-                    {...field}
-                    id="inscricao_estadual"
-                    label="Inscrição Estadual"
-                    variant="outlined"
-                    required
-                    color="primary"
-                    inputMode="text"
-                    className="w-1/4"
-                    margin="dense"
-                    disabled={!editing}
-                />
-                }}
-                control={control}
-                name="inscricao_estadual"
-                defaultValue={client.inscricao_estadual}
-                rules={{
-                    required: true
-                }}
+                    render={({ field: { onChange, ...field } }) => {
+                        <TextField
+                            {...field}
+                            id="inscricao_estadual"
+                            label="Inscrição Estadual"
+                            variant="outlined"
+                            required
+                            color="primary"
+                            inputMode="text"
+                            className="w-1/4"
+                            margin="dense"
+                            disabled={!editing}
+                            onChange={e => {
+                                if (!hasSpecialCharacters(e.target.value)) {
+                                    setValue('inscricao_estadual', e.target.value)
+                                    onChange(e)
+                                }
+                            }}
+                        />
+                    }}
+                    control={control}
+                    name="inscricao_estadual"
+                    defaultValue={client.inscricao_estadual}
                 />
             </div>
         </div>

@@ -4,7 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
 
-export default function EditClientFisico({control, client, editing, setValue }) {
+export default function EditClientFisico({ control, client, editing, setValue }) {
     const [cidade, setCidade] = useState(client.cidade || '');
     const [endereco, setEndereco] = useState(client.endereco || '');
     const [bairro, setBairro] = useState(client.bairro || '');
@@ -54,32 +54,32 @@ export default function EditClientFisico({control, client, editing, setValue }) 
                             margin="dense"
                             disabled={!editing}
                         />
-    )}
+                    )}
                 />
 
                 <Controller
                     name="cpf"
                     control={control}
                     defaultValue={client.cpf}
-                    rules={{
-                        maxLength: 11,
-                        required: true,
-                    }}
-                    render={({ field }) => (
+                    render={({ field: { onChange, ...field } }) => (
                         <TextField
                             {...field}
                             id="cpf"
                             label="CPF"
                             variant="outlined"
                             color="primary"
+                            inputMode="text"
                             required
                             className="w-1/4"
                             margin="dense"
-                            disabled={!editing}
-                            inputProps={{
-                                inputMode: 'numeric',
-                                pattern: '[0-9]*'
+                            inputProps={{ maxLength: 11 }}
+                            onChange={e => {
+                                if (!hasSpecialCharacters(e.target.value)) {
+                                    setValue('cpf', e.target.value)
+                                    onChange(e)
+                                }
                             }}
+                            disabled={!editing}
                         />
                     )}
                 />
@@ -88,9 +88,6 @@ export default function EditClientFisico({control, client, editing, setValue }) 
                     name="email"
                     control={control}
                     defaultValue={client.email}
-                    rules={{
-                        required: true
-                    }}
                     render={({ field }) => (
                         <TextField
                             {...field}
@@ -98,7 +95,8 @@ export default function EditClientFisico({control, client, editing, setValue }) 
                             label="E-mail"
                             variant="outlined"
                             color="primary"
-                            inputMode="text"
+                            inputMode="email"
+                            type="email"
                             className="w-1/4"
                             margin="dense"
                             disabled={!editing}
@@ -114,7 +112,7 @@ export default function EditClientFisico({control, client, editing, setValue }) 
                     rules={{
                         required: true
                     }}
-                    render={({ field: { onBlur, ...field } }) => (
+                    render={({ field: { onBlur, onChange, ...field } }) => (
                         <TextField
                             {...field}
                             id="cep"
@@ -129,9 +127,15 @@ export default function EditClientFisico({control, client, editing, setValue }) 
                                 validaCep(e)
                                 onBlur(e)
                             }}
+                            onChange={e => {
+                                if(!hasSpecialCharacters(e.target.value)){
+                                    setValue('cep', e.target.value)
+                                    onChange(e)
+                                }
+                            }}
                             disabled={!editing}
                         />
-    )}
+                    )}
                 />
                 <Controller
                     name="cidade"
@@ -215,7 +219,7 @@ export default function EditClientFisico({control, client, editing, setValue }) 
                             }}
                             disabled={!editing}
                         />
-    )}
+                    )}
                 />
 
                 <Controller
@@ -296,9 +300,6 @@ export default function EditClientFisico({control, client, editing, setValue }) 
                     name="telefone1"
                     control={control}
                     defaultValue={client.telefone1}
-                    rules={{
-                        required: true
-                    }}
                     render={({ field }) => (
                         <TextField
                             {...field}
@@ -307,7 +308,6 @@ export default function EditClientFisico({control, client, editing, setValue }) 
                             variant="outlined"
                             color="primary"
                             inputMode="tel"
-                            required
                             className="w-1/4"
                             margin="dense"
                             disabled={!editing}
