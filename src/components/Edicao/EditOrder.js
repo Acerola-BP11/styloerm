@@ -14,7 +14,6 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
     const [quantity, setQuantity] = useState('')
     const [material, setMaterial] = useState('')
     const [pattern, setPattern] = useState('')
-    const [patternCode, setPatternCode] = useState('')
     const [color, setCode] = useState('')
     const [size, setSize] = useState('')
     const [finishing, setFinishing] = useState('')
@@ -41,7 +40,6 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
         setQuantity('')
         setMaterial('')
         setPattern('')
-        setPatternCode('')
         setCode('')
         setSize('')
         setFinishing('')
@@ -55,7 +53,6 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
             quantity,
             material,
             pattern,
-            patternCode,
             color,
             size,
             finishing,
@@ -242,16 +239,6 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                         className="m-5"
                     />
                     <TextField
-                        label="Cod Desenho"
-                        inputMode="text"
-                        disabled={!editing}
-                        value={patternCode}
-                        onChange={e => {
-                            setPatternCode(e.target.value)
-                        }}
-                        className="m-5"
-                    />
-                    <TextField
                         label="Tamanho"
                         inputMode="text"
                         disabled={!editing}
@@ -338,7 +325,6 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                                     <TableCell align="center">Tecido</TableCell>
                                     <TableCell align="center">Cor</TableCell>
                                     <TableCell align="center">Desenho</TableCell>
-                                    <TableCell align="center">Cod Desenho</TableCell>
                                     <TableCell align="center">Tamanho</TableCell>
                                     <TableCell align="center">Acabamento</TableCell>
                                     <TableCell align="center">Preço Unitário</TableCell>
@@ -356,7 +342,6 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                                         <TableCell align="center">{row.material}</TableCell>
                                         <TableCell align="center">{row.color}</TableCell>
                                         <TableCell align="center">{row.pattern}</TableCell>
-                                        <TableCell align="center">{row.patternCode}</TableCell>
                                         <TableCell align="center">{row.size}</TableCell>
                                         <TableCell align="center">{row.finishing}</TableCell>
                                         <TableCell align="center">{row.unitaryPrice}</TableCell>
