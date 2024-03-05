@@ -136,6 +136,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                             value={city}
                             onChange={e => {
                                 setCity(e.target.value)
+                                setValue('cidade', e.target.value)
                                 onChange(e)
                             }}
                             required
@@ -159,6 +160,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                             value={adress}
                             onChange={e => {
                                 setAdress(e.target.value)
+                                setValue('endereco', e.target.value)
                                 onChange(e)
                             }}
                             required
