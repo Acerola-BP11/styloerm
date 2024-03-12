@@ -188,6 +188,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                             inputMode="text"
                             label="Forma de Pagamento"
                             value={paymentMethod}
+                            disabled={!editing}
                             onChange={e => {
                                 setPaymentMethod(e.target.value)
                                 onChange(e)
@@ -209,6 +210,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                             inputMode="text"
                             label="Observação"
                             value={note}
+                            disabled={!editing}
                             onChange={e => {
                                 setNote(e.target.value)
                                 onChange(e)
