@@ -13,6 +13,8 @@ export default function NewSale({ control, itensArray, setItensArray, setValue }
     const [adress, setAdress] = useState('')
     const [city, setCity] = useState('')
     const [name, SetName] = useState('')
+    const [paymentMethod, setPaymentMethod] = useState('')
+    const [note, setNote] = useState('')
     const [quantity, setQuantity] = useState('')
     const [material, setMaterial] = useState('')
     const [pattern, setPattern] = useState('')
@@ -113,14 +115,14 @@ export default function NewSale({ control, itensArray, setItensArray, setValue }
                         <Autocomplete
                             {...field}
                             value={valor}
-                            onChange={(event, newValue) => {
+                            onChange={(_, newValue) => {
                                 console.log(newValue)
-                                newValue? setValue('cliente', newValue.clientId) : setValue('cliente', null)
+                                newValue ? setValue('cliente', newValue.clientId) : setValue('cliente', null)
                                 setValor(newValue)
                                 updateCityAndAdress(newValue)
                             }}
                             inputValue={inputValue}
-                            onInputChange={(event, newInputValue) => {
+                            onInputChange={(_, newInputValue) => {
                                 setInputValue(newInputValue)
                             }}
                             disablePortal
@@ -155,7 +157,7 @@ export default function NewSale({ control, itensArray, setItensArray, setValue }
                         <TextField
                             {...field}
                             id="city"
-                            className="w-5/12"
+                            className="w-3/12"
                             inputMode="text"
                             label="Cidade"
                             value={city}
@@ -177,7 +179,7 @@ export default function NewSale({ control, itensArray, setItensArray, setValue }
                         <TextField
                             {...field}
                             id="adress"
-                            className="w-5/12"
+                            className="w-8/12"
                             inputMode="text"
                             label="Endereço"
                             value={adress}
@@ -189,7 +191,52 @@ export default function NewSale({ control, itensArray, setItensArray, setValue }
                         />
                     )}
                 />
-
+            </div>
+            <div
+                className="h-full w-full flex flex-row justify-between mt-5"
+            >
+                <Controller
+                    control={control}
+                    name="formapagamento"
+                    rules={{
+                        required: false
+                    }}
+                    render={({ field: { onChange, ...field } }) => (
+                        <TextField
+                            {...field}
+                            id="paymentmethod"
+                            className="w-3/12"
+                            inputMode="text"
+                            label="Forma de Pagamento"
+                            value={paymentMethod}
+                            onChange={e => {
+                                setPaymentMethod(e.target.value)
+                                onChange(e)
+                            }}
+                        />
+                    )}
+                />
+                <Controller
+                    control={control}
+                    name="observacao"
+                    rules={{
+                        required: false
+                    }}
+                    render={({ field: { onChange, ...field } }) => (
+                        <TextField
+                            {...field}
+                            id="note"
+                            className="w-8/12"
+                            inputMode="text"
+                            label="Observação"
+                            value={note}
+                            onChange={e => {
+                                setNote(e.target.value)
+                                onChange(e)
+                            }}
+                        />
+                    )}
+                />
             </div>
             <div className="h-full">
                 <Divider

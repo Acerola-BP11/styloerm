@@ -26,6 +26,8 @@ export default function NewOrder() {
         data.itens = itensArray
         const order = {
             client: data.cliente,
+            paymentMethod: data.formapagamento,
+            note: data.observacao,
             city: data.cidade,
             adress: data.endereco,
             itens: data.itens,

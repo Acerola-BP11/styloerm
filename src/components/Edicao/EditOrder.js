@@ -8,8 +8,10 @@ import { Controller } from "react-hook-form";
 export default function EditSale({ control, itensArray, setItensArray, setValue, order, editing }) {
 
     const [client, setClient] = useState('')
-    const [adress, setAdress] = useState('' || order.adress)
-    const [city, setCity] = useState('' || order.city)
+    const [adress, setAdress] = useState(order.adress || '')
+    const [city, setCity] = useState(order.city || '')
+    const [note, setNote] = useState(order.note || '')
+    const [paymentMethod, setPaymentMethod] = useState(order.paymentMethod || '')
     const [name, SetName] = useState('')
     const [quantity, setQuantity] = useState('')
     const [material, setMaterial] = useState('')
@@ -168,6 +170,52 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                     )}
                 />
 
+            </div>
+            <div
+                className="h-full w-full flex flex-row justify-between mt-5"
+            >
+                <Controller
+                    control={control}
+                    name="formapagamento"
+                    rules={{
+                        required: false
+                    }}
+                    render={({ field: { onChange, ...field } }) => (
+                        <TextField
+                            {...field}
+                            id="paymentmethod"
+                            className="w-3/12"
+                            inputMode="text"
+                            label="Forma de Pagamento"
+                            value={paymentMethod}
+                            onChange={e => {
+                                setPaymentMethod(e.target.value)
+                                onChange(e)
+                            }}
+                        />
+                    )}
+                />
+                <Controller
+                    control={control}
+                    name="observacao"
+                    rules={{
+                        required: false
+                    }}
+                    render={({ field: { onChange, ...field } }) => (
+                        <TextField
+                            {...field}
+                            id="note"
+                            className="w-8/12"
+                            inputMode="text"
+                            label="Observação"
+                            value={note}
+                            onChange={e => {
+                                setNote(e.target.value)
+                                onChange(e)
+                            }}
+                        />
+                    )}
+                />
             </div>
             <div className="h-full">
                 <Divider
