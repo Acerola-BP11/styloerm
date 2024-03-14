@@ -11,7 +11,9 @@ export default function AuthContext({ children }) {
         const status = error.response?.status || 500
         if (status === 401) {
             router.push('/login')
-        } else {
+        } else if(status == 504) {
+            router.push('/login')
+        }else{
             return Promise.reject(error)
         }
     })
