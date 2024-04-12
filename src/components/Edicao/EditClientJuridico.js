@@ -319,9 +319,6 @@ export default function EditClientJurico({ control, client, editing, setValue })
                     control={control}
                     name="telefone1"
                     defaultValue={client.telefone1}
-                    rules={{
-                        required: true
-                    }}
                 />
 
                 <Controller

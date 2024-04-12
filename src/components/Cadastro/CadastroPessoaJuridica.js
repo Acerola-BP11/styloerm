@@ -27,7 +27,7 @@ export default function CadastroPessoaJuridica({ control, setValue }) {
                 setCidade(data.localidade)
                 setBairro(data.bairro)
                 setEndereco(data.logradouro)
-                setUf(data.uf)
+                setUf(data.estado)
             } catch (err) {
                 alert('O CEP digitado é invalido!')
             }
