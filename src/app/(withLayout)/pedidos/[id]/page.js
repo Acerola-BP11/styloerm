@@ -1,7 +1,7 @@
 'use client'
 import EditSale from "@/components/Edicao/EditOrder";
 import DarkTheme from "@/components/darkTheme";
-import { Edit } from "@mui/icons-material";
+import { ArchiveRounded, Edit } from "@mui/icons-material";
 import { Button, IconButton, MenuItem, Select, Skeleton } from "@mui/material";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -20,6 +20,11 @@ export default function EditClient({ params }) {
 
     const handleChange = e => {
         setType(e.target.value)
+    }
+
+    const handlePDF = async _ => {
+        await axios.get(`https://https://styloapi.vercel.app/orders/${params.id}`)
+        alert('PDF baixado!')
     }
 
     const onInvalid = (errors) => console.error(errors)
@@ -64,6 +69,13 @@ export default function EditClient({ params }) {
         <div className="h-full w-full flex flex-col items-center justify-center overflow-auto">
             <DarkTheme>
                 <div className="w-full h-auto flex justify-end p-5 overflow-hidden">
+                    <IconButton
+                        onClick={handlePDF}
+                        className="pr-2"
+                    >
+                        <ArchiveRounded/>
+
+                    </IconButton>
                     <Select
                         defaultValue={order.budget ? 'cotacao' : 'venda'}
                         value={type}
