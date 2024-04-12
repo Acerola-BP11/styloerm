@@ -25,7 +25,7 @@ export default function EditClient({ params }) {
     const handlePDF = async _ => {
         alert('Entrei na HandlePDF')
         try {
-            const response = await axios.get(`https://https://styloapi.vercel.app/orders/pdf/${params.id}`)
+            const response = await axios.get(`https://styloapi.vercel.app/orders/pdf/${params.id}`)
             console.log(await response.data)
         } catch (error) {
             console.log(error)
