@@ -26,13 +26,19 @@ export default function EditClient({ params }) {
         alert('Entrei na HandlePDF')
         try {
             const response = await axios.get(`https://styloapi.vercel.app/orders/pdf/${params.id}`)
-            const pdfURL = await response.data
-            const headers = new Headers()
-            headers.append("Content-Disposition", 'attachment; filename="test.pdf"')
-            headers.append("Content-Type", "application/pdf");
-            return new Response(pdfURL, {
-                headers
-            })
+            const pdfBlob = await response.data
+            const pdfURL = window.URL.createObjectURL(
+                new Blob([pdfBlob]),
+            );
+            const link = document.createElement('a');
+            link.href = pdfURL;
+            link.setAttribute(
+                'download',
+                `FileName.pdf`,
+            );
+            document.body.appendChild(link);
+            link.click();
+            link.parentNode.removeChild(link);
         } catch (error) {
             console.log(error)
         } finally {
