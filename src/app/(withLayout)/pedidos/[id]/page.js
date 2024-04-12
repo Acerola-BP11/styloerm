@@ -24,8 +24,14 @@ export default function EditClient({ params }) {
 
     const handlePDF = async _ => {
         alert('Entrei na HandlePDF')
-        const response = await axios.get(`https://https://styloapi.vercel.app/orders/pdf/${params.id}`)
-        alert(await response.data)
+        try {
+            const response = await axios.get(`https://https://styloapi.vercel.app/orders/pdf/${params.id}`)
+            console.log(await response.data)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            alert('Processado!')
+        }
     }
 
     const onInvalid = (errors) => console.error(errors)
@@ -74,7 +80,7 @@ export default function EditClient({ params }) {
                         onClick={handlePDF}
                         className="pr-2"
                     >
-                        <PictureAsPdf/>
+                        <PictureAsPdf />
 
                     </IconButton>
                     <Select
