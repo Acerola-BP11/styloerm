@@ -1,7 +1,7 @@
 'use client'
 import EditSale from "@/components/Edicao/EditOrder";
 import DarkTheme from "@/components/darkTheme";
-import { ArchiveRounded, Edit } from "@mui/icons-material";
+import { Edit, PictureAsPdf } from "@mui/icons-material";
 import { Button, IconButton, MenuItem, Select, Skeleton } from "@mui/material";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -23,8 +23,8 @@ export default function EditClient({ params }) {
     }
 
     const handlePDF = async _ => {
-        await axios.get(`https://https://styloapi.vercel.app/orders/${params.id}`)
-        alert('PDF baixado!')
+        alert('Entrei na HandlePDF')
+        return await axios.get(`https://https://styloapi.vercel.app/orders/${params.id}`)
     }
 
     const onInvalid = (errors) => console.error(errors)
@@ -73,7 +73,7 @@ export default function EditClient({ params }) {
                         onClick={handlePDF}
                         className="pr-2"
                     >
-                        <ArchiveRounded/>
+                        <PictureAsPdf/>
 
                     </IconButton>
                     <Select
