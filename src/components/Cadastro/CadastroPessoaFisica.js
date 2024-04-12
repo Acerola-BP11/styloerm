@@ -25,8 +25,8 @@ export default function CadastroPessoaFisica({ control, setValue }) {
                 setValue('bairro', data.bairro)
                 setEndereco(data.logradouro)
                 setValue('endereco', data.logradouro)
-                setUf(data.estado)
-                setValue('uf', data.estado)
+                setUf(data.uf)
+                setValue('uf', data.uf)
             } catch (err) {
                 alert('O CEP digitado é invalido!')
             }
