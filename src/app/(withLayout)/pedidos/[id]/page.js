@@ -23,17 +23,16 @@ export default function EditClient({ params }) {
     }
 
     const handlePDF = async _ => {
-        alert('Entrei na HandlePDF')
         try {
             const link = document.createElement('a')
             link.href = `https://styloapi.vercel.app/orders/pdf/${params.id}`
+            link.target = '_blank'
             document.body.appendChild(link)
             link.click()
             document.body.removeChild(link)
         } catch (error) {
             console.log(error)
-        } finally {
-            alert('Processado!')
+            alert('Erro ao abrir PDF!')
         }
     }
 
