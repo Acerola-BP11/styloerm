@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
     return (
         <html lang="pt-br">
             <body>
-                <div className='flex flex-1 flex-col min-h-screen max-h-fit w-screen bg-black'>
+                <div className='flex flex-1 flex-col h-screen max-h-fit w-screen bg-black overflow-auto'>
                     <Header />
                     <AuthContext />
                     {children}
