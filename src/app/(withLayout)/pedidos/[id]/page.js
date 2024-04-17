@@ -1,7 +1,7 @@
 'use client'
 import EditSale from "@/components/Edicao/EditOrder";
 import DarkTheme from "@/components/darkTheme";
-import { Edit, PictureAsPdf } from "@mui/icons-material";
+import { Edit, PictureAsPdf, FileDownload } from "@mui/icons-material";
 import { Button, IconButton, MenuItem, Select, Skeleton } from "@mui/material";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -26,6 +26,20 @@ export default function EditClient({ params }) {
         try {
             const link = document.createElement('a')
             link.href = `https://styloapi.vercel.app/orders/pdf/${params.id}`
+            link.target = '_blank'
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+        } catch (error) {
+            console.log(error)
+            alert('Erro ao abrir PDF!')
+        }
+    }
+
+    const handlePDFSupplier = async _ => {
+        try {
+            const link = document.createElement('a')
+            link.href = `https://styloapi.vercel.app/orders/pdf/${params.id}/supplier`
             link.target = '_blank'
             document.body.appendChild(link)
             link.click()
@@ -79,8 +93,15 @@ export default function EditClient({ params }) {
             <DarkTheme>
                 <div className="w-full h-auto flex justify-end p-5 overflow-hidden">
                     <IconButton
+                        onClick={handlePDFSupplier}
+                        className="pr-5"
+                    >
+                        <FileDownload/>
+
+                    </IconButton>
+                    <IconButton
                         onClick={handlePDF}
-                        className="pr-2"
+                        className="pr-5"
                     >
                         <PictureAsPdf />
 
