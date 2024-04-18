@@ -83,10 +83,9 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
             }
         })
         setClient(clients.data)
-        console.log(client)
-        setValue('cliente', `${client.cnpj || client.cpf} - ${client.razao || client.nome}`)
-        setValue('endereco', client.adress)
-        setValue('cidade', client.city)
+        setValue('cliente', order.client)
+        setValue('endereco', clients.adress)
+        setValue('cidade', clients.city)
     }
 
     useEffect(() => {
