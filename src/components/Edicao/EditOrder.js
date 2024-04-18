@@ -84,6 +84,8 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
         })
         setClient(clients.data)
         setValue('cliente', order.client)
+        setValue('formapagamento', order.paymentMethod)
+        setValue('observacao', order.note)
         setValue('endereco', clients.adress)
         setValue('cidade', clients.city)
     }

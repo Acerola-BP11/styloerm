@@ -58,7 +58,9 @@ export default function EditClient({ params }) {
             city: data.cidade,
             adress: data.endereco,
             itens: data.itens,
-            budget: type === 'cotacao' ? true : false
+            budget: type === 'cotacao' ? true : false,
+            note: data.observacao,
+            paymentMethod: data.formapagamento
         }
         try {
             setEditing(false)
