@@ -53,7 +53,7 @@ export default function EditClient({ params }) {
     const onInvalid = (errors) => console.error(errors)
     const onSubmit = async (data) => {
         data.itens = itensArray
-        const order = {
+        const updatedOrder = {
             client: data.cliente,
             city: data.cidade,
             adress: data.endereco,
@@ -64,7 +64,12 @@ export default function EditClient({ params }) {
         }
         try {
             setEditing(false)
-            router.push('/clientes/lista')
+            await axios.patch(`https://styloapi.vercel.app/orders/${order.id}`, updatedOrder, {
+                headers: {
+                    Authorization: localStorage.getItem('token')
+                }
+            })
+            router.push('/pedidos/lista')
             console.log(order)
         } catch (error) {
             alert(error)
