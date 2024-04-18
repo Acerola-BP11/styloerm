@@ -82,6 +82,7 @@ export default function EditSale({ control, itensArray, setItensArray, setValue,
                 "Authorization": localStorage.getItem('token')
             }
         })
+        console.log(clients.data)
         setClient(clients.data)
         setValue('cliente', order.client)
         setValue('formapagamento', order.paymentMethod)
