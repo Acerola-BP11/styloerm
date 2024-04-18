@@ -64,7 +64,7 @@ export default function EditClient({ params }) {
         }
         try {
             setEditing(false)
-            await axios.patch(`https://styloapi.vercel.app/orders/${order.id}`, updatedOrder, {
+            await axios.patch(`https://styloapi.vercel.app/orders/${params.id}`, updatedOrder, {
                 headers: {
                     Authorization: localStorage.getItem('token')
                 }
