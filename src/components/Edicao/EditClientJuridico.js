@@ -46,7 +46,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                             color="primary"
                             inputMode="text"
                             required
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             disabled={!editing}
                         />
@@ -69,7 +69,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                             variant="outlined"
                             color="primary"
                             inputMode="text"
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             disabled={!editing}
                         />
@@ -90,7 +90,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                             color="primary"
                             inputMode="numeric"
                             required
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             disabled={!editing}
                             inputProps={{ maxLength: 14 }}
@@ -119,7 +119,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                             variant="outlined"
                             color="primary"
                             inputMode="numeric"
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             required
                             disabled={!editing}
@@ -153,7 +153,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                             color="primary"
                             inputMode="text"
                             required
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             disabled={!editing}
                             value={cidade}
@@ -181,7 +181,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                             color="primary"
                             inputMode="text"
                             required
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             disabled={!editing}
                             value={endereco}
@@ -211,7 +211,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                             color="primary"
                             inputMode="text"
                             required
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             disabled={!editing}
                             value={bairro}
@@ -239,7 +239,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                             color="primary"
                             inputMode="text"
                             required
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             disabled={!editing}
                             value={uf}
@@ -268,7 +268,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                             color="primary"
                             inputMode="numeric"
                             required
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             disabled={!editing}
                         />
@@ -292,7 +292,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                             variant="outlined"
                             color="primary"
                             inputMode="text"
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             disabled={!editing}
                         />
@@ -311,7 +311,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                             variant="outlined"
                             color="primary"
                             inputMode="tel"
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             disabled={!editing}
                         />
@@ -330,7 +330,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                             variant="outlined"
                             color="primary"
                             inputMode="tel"
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             disabled={!editing}
                         />
@@ -352,7 +352,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                             color="primary"
                             inputMode="email"
                             type="email"
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             disabled={!editing}
                         />
@@ -372,7 +372,7 @@ export default function EditClientJurico({ control, client, editing, setValue })
                             required
                             color="primary"
                             inputMode="text"
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             disabled={!editing}
                             onChange={e => {

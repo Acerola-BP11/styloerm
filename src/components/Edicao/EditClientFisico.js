@@ -50,7 +50,7 @@ export default function EditClientFisico({ control, client, editing, setValue })
                             required
                             color="primary"
                             inputMode="text"
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 lg:w-1/4"
                             margin="dense"
                             disabled={!editing}
                         />
@@ -70,7 +70,7 @@ export default function EditClientFisico({ control, client, editing, setValue })
                             color="primary"
                             inputMode="text"
                             required
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             inputProps={{ maxLength: 11 }}
                             onChange={e => {
@@ -97,7 +97,7 @@ export default function EditClientFisico({ control, client, editing, setValue })
                             color="primary"
                             inputMode="email"
                             type="email"
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             disabled={!editing}
                         />
@@ -120,7 +120,7 @@ export default function EditClientFisico({ control, client, editing, setValue })
                             variant="outlined"
                             color="primary"
                             inputMode="numeric"
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             required
                             onBlur={e => {
@@ -153,7 +153,7 @@ export default function EditClientFisico({ control, client, editing, setValue })
                             color="primary"
                             inputMode="text"
                             required
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             value={cidade}
                             onChange={(e) => {
@@ -180,7 +180,7 @@ export default function EditClientFisico({ control, client, editing, setValue })
                             color="primary"
                             inputMode="text"
                             required
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             value={endereco}
                             onChange={e => {
@@ -210,7 +210,7 @@ export default function EditClientFisico({ control, client, editing, setValue })
                             color="primary"
                             inputMode="text"
                             required
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             value={bairro}
                             onChange={e => {
@@ -238,7 +238,7 @@ export default function EditClientFisico({ control, client, editing, setValue })
                             color="primary"
                             inputMode="text"
                             required
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             value={uf}
                             onChange={e => {
@@ -266,7 +266,7 @@ export default function EditClientFisico({ control, client, editing, setValue })
                             color="primary"
                             inputMode="numeric"
                             required
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             disabled={!editing}
                         />
@@ -289,7 +289,7 @@ export default function EditClientFisico({ control, client, editing, setValue })
                             variant="outlined"
                             color="primary"
                             inputMode="text"
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             disabled={!editing}
                         />
@@ -308,7 +308,7 @@ export default function EditClientFisico({ control, client, editing, setValue })
                             variant="outlined"
                             color="primary"
                             inputMode="tel"
-                            className="w-1/4 sm:w-3/4"
+                            className="sm:w-3/4 md:w-1/4"
                             margin="dense"
                             disabled={!editing}
                         />
